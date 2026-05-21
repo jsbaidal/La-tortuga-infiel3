@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-pokedex-bg text-white font-sans antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0F0F1A; }
+  ::-webkit-scrollbar-thumb { background: #2A2A45; border-radius: 99px; }
+}
+
+@layer components {
+  .type-fire     { @apply bg-orange-500/20 text-orange-400 border border-orange-500/30; }
+  .type-water    { @apply bg-blue-500/20 text-blue-400 border border-blue-500/30; }
+  .type-grass    { @apply bg-green-500/20 text-green-400 border border-green-500/30; }
+  .type-electric { @apply bg-yellow-500/20 text-yellow-400 border border-yellow-500/30; }
+  .type-psychic  { @apply bg-pink-500/20 text-pink-400 border border-pink-500/30; }
+  .type-ice      { @apply bg-cyan-500/20 text-cyan-400 border border-cyan-500/30; }
+  .type-dragon   { @apply bg-violet-500/20 text-violet-400 border border-violet-500/30; }
+  .type-dark     { @apply bg-neutral-500/20 text-neutral-400 border border-neutral-500/30; }
+  .type-normal   { @apply bg-slate-500/20 text-slate-400 border border-slate-500/30; }
+  .type-fighting { @apply bg-red-500/20 text-red-400 border border-red-500/30; }
+  .type-poison   { @apply bg-purple-500/20 text-purple-400 border border-purple-500/30; }
+  .type-ground   { @apply bg-amber-500/20 text-amber-400 border border-amber-500/30; }
+  .type-flying   { @apply bg-sky-500/20 text-sky-400 border border-sky-500/30; }
+  .type-bug      { @apply bg-lime-500/20 text-lime-400 border border-lime-500/30; }
+  .type-rock     { @apply bg-stone-500/20 text-stone-400 border border-stone-500/30; }
+  .type-ghost    { @apply bg-indigo-500/20 text-indigo-400 border border-indigo-500/30; }
+  .type-steel    { @apply bg-zinc-500/20 text-zinc-400 border border-zinc-500/30; }
+  .type-fairy    { @apply bg-rose-500/20 text-rose-400 border border-rose-500/30; }
+
+  .poke-card {
+    @apply bg-pokedex-card border border-pokedex-border rounded-2xl
+           hover:border-pokedex-blue/50 hover:-translate-y-1
+           transition-all duration-200 cursor-pointer overflow-hidden;
+  }
+
+  .btn-primary {
+    @apply bg-pokedex-blue/20 text-pokedex-blue border border-pokedex-blue/40
+           font-bold text-sm px-5 py-2 rounded-xl
+           hover:bg-pokedex-blue/30 transition-all duration-200;
+  }
+
+  .search-input {
+    @apply w-full bg-pokedex-card border border-pokedex-border rounded-xl
+           px-4 py-3 text-sm text-white placeholder:text-white/30
+           outline-none focus:border-pokedex-blue/60 transition-colors;
+  }
+}

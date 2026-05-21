@@ -1,0 +1,47 @@
+// Navbar — barra de navegación principal
+
+function Navbar() {
+  return (
+    <header className="sticky top-0 z-50 bg-pokedex-bg/80 backdrop-blur-md border-b border-pokedex-border">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-pokedex-red flex items-center justify-center animate-pulse_glow">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+              alt="Pokéball"
+              className="w-5 h-5"
+            />
+          </div>
+          <span className="font-sans font-black text-lg tracking-tight">
+            Poké<span className="text-pokedex-blue">dex</span>
+          </span>
+        </div>
+
+        {/* Nav links */}
+        <nav className="hidden md:flex items-center gap-6">
+          {['Explore', 'Favorites', 'About'].map((link) => (
+            <a
+              key={link}
+              href="#"
+              className="text-sm font-semibold text-white/40 hover:text-white transition-colors"
+            >
+              {link}
+            </a>
+          ))}
+        </nav>
+
+        {/* Favoritos counter */}
+        <div className="flex items-center gap-2 bg-pokedex-card border border-pokedex-border rounded-xl px-4 py-2">
+          <span className="text-pokedex-yellow text-sm">★</span>
+          <span className="text-sm font-bold text-white/60 font-mono">0</span>
+          <span className="text-white/20 text-sm font-mono">/ 151</span>
+        </div>
+
+      </div>
+    </header>
+  )
+}
+
+export default Navbar
