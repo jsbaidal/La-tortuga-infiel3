@@ -1,8 +1,10 @@
 export function setItem(key, value, { ttl } = {}) {
   try {
+    const numericTtl = Number(ttl);
+    const hasValidTtl = ttl == null || (Number.isFinite(numericTtl) && numericTtl >= 0);
     const record = {
       value,
-      expires: ttl != null ? Date.now() + ttl * 1000 : null,
+      expires: hasValidTtl && ttl != null ? Date.now() + numericTtl * 1000 : null,
     };
     localStorage.setItem(key, JSON.stringify(record));
     return true;
@@ -25,7 +27,7 @@ export function getItem(key, defaultValue = null) {
 
     if (!hasStoredShape) return defaultValue;
 
-    if (record.expires && Date.now() > record.expires) {
+    if (record.expires != null && Date.now() > record.expires) {
       localStorage.removeItem(key);
       return defaultValue;
     }

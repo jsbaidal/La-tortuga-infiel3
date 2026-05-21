@@ -1,11 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { getItem, setItem, removeItem } from '../utils/localStorage';
 
 export default function useLocalStorage(key, initialValue, options = {}) {
   const { ttl = undefined, sync = true } = options;
   const mountedRef = useRef(true);
+  const previousKeyRef = useRef(key);
+  const skipPersistRef = useRef(false);
 
-  const read = () => getItem(key, typeof initialValue === 'function' ? initialValue() : initialValue);
+  const defaultValue = useMemo(
+    () => (typeof initialValue === 'function' ? initialValue() : initialValue),
+    [initialValue],
+  );
+
+  const read = useCallback(() => getItem(key, defaultValue), [key, defaultValue]);
 
   const [state, setState] = useState(() => read());
 
@@ -17,11 +24,25 @@ export default function useLocalStorage(key, initialValue, options = {}) {
   }, []);
 
   useEffect(() => {
+    if (previousKeyRef.current === key) return;
+
+    previousKeyRef.current = key;
+    skipPersistRef.current = true;
+    setState(read());
+  }, [key, read]);
+
+  useEffect(() => {
     try {
       if (state === undefined) {
         removeItem(key);
         return;
       }
+
+      if (skipPersistRef.current) {
+        skipPersistRef.current = false;
+        return;
+      }
+
       setItem(key, state, { ttl });
     } catch (err) {
       console.error('useLocalStorage set error:', err);
@@ -38,7 +59,7 @@ export default function useLocalStorage(key, initialValue, options = {}) {
     };
     window.addEventListener('storage', handler);
     return () => window.removeEventListener('storage', handler);
-  }, [key, sync]);
+  }, [key, sync, read]);
 
   const setLocal = (val) => {
     setState((prev) => (typeof val === 'function' ? val(prev) : val));
@@ -46,7 +67,6 @@ export default function useLocalStorage(key, initialValue, options = {}) {
 
   const remove = () => {
     try {
-      removeItem(key);
       setState(undefined);
     } catch (err) {
       console.error('useLocalStorage remove error:', err);
