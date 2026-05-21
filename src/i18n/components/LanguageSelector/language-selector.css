@@ -1,0 +1,64 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .language-selector {
+    width: 12rem;
+  }
+
+  .language-selector__menu {
+    @apply absolute right-0 top-[calc(100%-1px)] z-20 overflow-hidden rounded-b-2xl border border-pokedex-border border-t-0 bg-pokedex-card shadow-2xl shadow-black/30;
+    width: 12rem;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    transform-origin: top;
+    visibility: hidden;
+    transition: max-height 220ms ease, opacity 180ms ease, transform 220ms ease;
+    will-change: max-height, opacity, transform;
+  }
+
+  .language-selector__menu[data-state='open'] {
+    max-height: 16rem;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  .language-selector__menu[data-state='closing'] {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    visibility: visible;
+    pointer-events: none;
+  }
+
+  .language-selector__menu[data-state='closed'] {
+    pointer-events: none;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-0.25rem);
+    visibility: hidden;
+  }
+
+  .language-selector__list {
+    @apply py-1;
+  }
+
+  .language-selector__trigger {
+    @apply flex h-12 items-center gap-3 rounded-2xl border border-pokedex-border bg-pokedex-card px-3 text-left shadow-sm transition-all hover:border-pokedex-blue/50 hover:bg-pokedex-card/90;
+    width: 12rem;
+  }
+
+  .language-selector__trigger--open {
+    @apply rounded-b-none border-b-transparent;
+  }
+
+  .language-selector__item {
+    @apply flex h-12 w-full items-center gap-3 px-3 text-left transition-colors hover:bg-white/5;
+  }
+
+  .language-selector__item--selected {
+    @apply bg-white/5;
+  }
+}

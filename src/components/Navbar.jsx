@@ -1,9 +1,10 @@
 // Navbar — barra de navegación principal
 
 import useI18n from '../i18n/useI18n'
+import LanguageSelector from '../i18n/components/LanguageSelector';
 
 function Navbar() {
-  const { t, lang, changeLanguage, availableLanguages } = useI18n();
+  const { t } = useI18n();
 
   const links = [
     { id: 'home', label: t('navbar.home') },
@@ -43,23 +44,14 @@ function Navbar() {
         </nav>
 
         {/* Favoritos counter */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center justify-end gap-3">
           <div className="flex items-center gap-2 bg-pokedex-card border border-pokedex-border rounded-xl px-4 py-2">
             <span className="text-pokedex-yellow text-sm">★</span>
             <span className="text-sm font-bold text-white/60 font-mono">0</span>
             <span className="text-white/20 text-sm font-mono">/ 151</span>
           </div>
 
-          <select
-            aria-label={t('navbar.language')}
-            value={lang}
-            onChange={(e) => changeLanguage(e.target.value)}
-            className="select-input w-20"
-          >
-            {availableLanguages.map((l) => (
-              <option key={l} value={l}>{l.toUpperCase()}</option>
-            ))}
-          </select>
+          <LanguageSelector />
         </div>
 
       </div>
