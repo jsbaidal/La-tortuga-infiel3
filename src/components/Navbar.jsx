@@ -20,7 +20,7 @@ function Navbar() {
           <div className="w-8 h-8 rounded-full bg-pokedex-red flex items-center justify-center animate-pulse_glow">
             <img
               src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
-              alt="Pokéball"
+              alt={t('navbar.logo_alt')}
               className="w-5 h-5"
             />
           </div>
@@ -51,7 +51,7 @@ function Navbar() {
           </div>
 
           <select
-            aria-label="Language selector"
+            aria-label={t('navbar.language')}
             value={lang}
             onChange={(e) => changeLanguage(e.target.value)}
             className="select-input w-20"

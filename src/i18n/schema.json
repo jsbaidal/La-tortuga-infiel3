@@ -8,6 +8,7 @@
     "home": true,
     "favorites": true,
     "language": true,
+    "logo_alt": true,
     "about": true
   },
   "home": {

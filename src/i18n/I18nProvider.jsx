@@ -36,17 +36,10 @@ export function I18nProvider({ children, defaultLang = 'en' }) {
     return () => { mounted = false };
   }, [lang]);
 
-  const changeLanguage = async (newLang) => {
+  const changeLanguage = (newLang) => {
     if (!availableLanguages.includes(newLang)) throw new Error('Unsupported language');
-    try {
-      setLoading(true);
-      const m = await loadLocale(newLang);
-      setMessages(m);
-      setLang(newLang);
-      try { localStorage.setItem('lang', newLang); } catch {}
-    } finally {
-      setLoading(false);
-    }
+    setLang(newLang);
+    try { localStorage.setItem('lang', newLang); } catch {}
   };
 
   const t = (key) => {
