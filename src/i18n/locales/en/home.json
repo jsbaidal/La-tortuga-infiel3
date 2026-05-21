@@ -1,0 +1,20 @@
+{
+  "generation_label": "Generation I",
+  "title": {
+    "prefix": "Explore the",
+    "highlight": "Pokédex"
+  },
+  "description": "Search, filter and discover all 151 original Pokémon. Save your favorites and build your collection.",
+  "stats": {
+    "pokemon": "Pokémon",
+    "types": "Types",
+    "caught": "Caught"
+  },
+  "search_placeholder": "Search Pokémon...",
+  "filters": "filters — feature 3",
+  "pagination": {
+    "prev": "← Prev",
+    "next": "Next →",
+    "page_info": "page 1 — feature 4"
+  }
+}

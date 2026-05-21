@@ -1,6 +1,16 @@
 // Navbar — barra de navegación principal
 
+import useI18n from '../i18n/useI18n'
+
 function Navbar() {
+  const { t, lang, changeLanguage, availableLanguages } = useI18n();
+
+  const links = [
+    t('navbar.home'),
+    t('navbar.favorites'),
+    t('navbar.about'),
+  ];
+
   return (
     <header className="sticky top-0 z-50 bg-pokedex-bg/80 backdrop-blur-md border-b border-pokedex-border">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -21,7 +31,7 @@ function Navbar() {
 
         {/* Nav links */}
         <nav className="hidden md:flex items-center gap-6">
-          {['Explore', 'Favorites', 'About'].map((link) => (
+          {links.map((link) => (
             <a
               key={link}
               href="#"
@@ -33,10 +43,23 @@ function Navbar() {
         </nav>
 
         {/* Favoritos counter */}
-        <div className="flex items-center gap-2 bg-pokedex-card border border-pokedex-border rounded-xl px-4 py-2">
-          <span className="text-pokedex-yellow text-sm">★</span>
-          <span className="text-sm font-bold text-white/60 font-mono">0</span>
-          <span className="text-white/20 text-sm font-mono">/ 151</span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 bg-pokedex-card border border-pokedex-border rounded-xl px-4 py-2">
+            <span className="text-pokedex-yellow text-sm">★</span>
+            <span className="text-sm font-bold text-white/60 font-mono">0</span>
+            <span className="text-white/20 text-sm font-mono">/ 151</span>
+          </div>
+
+          <select
+            aria-label="Language selector"
+            value={lang}
+            onChange={(e) => changeLanguage(e.target.value)}
+            className="select-input"
+          >
+            {availableLanguages.map((l) => (
+              <option key={l} value={l}>{l.toUpperCase()}</option>
+            ))}
+          </select>
         </div>
 
       </div>

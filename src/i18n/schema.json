@@ -1,0 +1,38 @@
+{
+  "common": {
+    "loading": true,
+    "error": true,
+    "not_found": true
+  },
+  "navbar": {
+    "home": true,
+    "favorites": true,
+    "language": true,
+    "about": true
+  },
+  "home": {
+    "generation_label": true,
+    "title": {
+      "prefix": true,
+      "highlight": true
+    },
+    "description": true,
+    "stats": {
+      "pokemon": true,
+      "types": true,
+      "caught": true
+    },
+    "search_placeholder": true,
+    "filters": true,
+    "pagination": {
+      "prev": true,
+      "next": true,
+      "page_info": true
+    }
+    },
+  "footer": {
+    "data_from": true,
+    "pokeapi": true,
+    "learning_project": true
+  }
+}

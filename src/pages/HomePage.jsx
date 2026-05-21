@@ -2,21 +2,24 @@
 
 import PokemonCard from "../components/PokemonCard";
 import { useState, useEffect } from "react";
-
-const STATS = [
-  { label: "Pokémon", value: "151", color: "text-pokedex-blue" },
-  { label: "Types", value: "15", color: "text-pokedex-green" },
-  { label: "Caught", value: "0", color: "text-pokedex-yellow" },
-];
+import useI18n from '../i18n/useI18n'
 
 function HomePage() {
+  const { t } = useI18n();
   const [pokemon, setPokemon] = useState([]); //state para el nombre del pokemon a buscar
   const [query, setQuery] = useState("");
+
+  const STATS = [
+    { label: t('home.stats.pokemon'), value: "151", color: "text-pokedex-blue" },
+    { label: t('home.stats.types'), value: "15", color: "text-pokedex-green" },
+    { label: t('home.stats.caught'), value: "0", color: "text-pokedex-yellow" },
+  ];
 
   const handleChange = (e) => {
     // función para manejar el cambio en el input de búsqueda
     setQuery(e.target.value); // set name to e.target.value (event)
   };
+
   useEffect(() => {
     fetch("https://pokeapi.co/api/v2/pokemon/")
       .then((res) => res.json())
@@ -34,16 +37,15 @@ function HomePage() {
       <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <p className="text-xs font-mono text-white/30 mb-3 tracking-widest uppercase">
-            Generation I
+            {t('home.generation_label')}
           </p>
           <h1 className="text-5xl font-black tracking-tight mb-4 leading-none">
-            Explore the
+            {t('home.title.prefix')}
             <br />
-            <span className="text-pokedex-blue">Pokédex</span>
+            <span className="text-pokedex-blue">{t('home.title.highlight')}</span>
           </h1>
           <p className="text-white/40 text-sm max-w-sm leading-relaxed">
-            Search, filter and discover all 151 original Pokémon. Save your
-            favorites and build your collection.
+            {t('home.description')}
           </p>
         </div>
 
@@ -67,14 +69,14 @@ function HomePage() {
           <input
             type="text"
             value={query}
-            placeholder="Search Pokémon..."
+            placeholder={t('home.search_placeholder')}
             onChange={handleChange}
             className="search-input pl-10  opacity-50"
           />
         </div>
         <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-pokedex-border">
           <span className="text-xs text-white/20 font-mono">
-            filters — feature 3
+            {t('home.filters')}
           </span>
         </div>
       </div>
@@ -97,13 +99,13 @@ function HomePage() {
       {/* Paginación — Feature 4 */}
       <div className="mt-12 flex items-center justify-center gap-4">
         <button disabled className="btn-primary opacity-30 cursor-not-allowed">
-          ← Prev
+          {t('home.pagination.prev')}
         </button>
         <span className="text-xs font-mono text-white/20">
-          page 1 — feature 4
+          {t('home.pagination.page_info')}
         </span>
         <button disabled className="btn-primary opacity-30 cursor-not-allowed">
-          Next →
+          {t('home.pagination.next')}
         </button>
       </div>
     </main>
