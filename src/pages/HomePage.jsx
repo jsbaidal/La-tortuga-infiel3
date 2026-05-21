@@ -52,9 +52,9 @@ function HomePage() {
         {/* Stats */}
         <div className="flex gap-6">
           {STATS.map(({ label, value, color }) => (
-            <div key={label} className="text-center">
+            <div key={label} className="text-center w-24">
               <p className={`text-3xl font-black ${color}`}>{value}</p>
-              <p className="text-xs text-white/30 font-mono mt-1">{label}</p>
+              <p className="text-xs text-white/30 font-mono mt-1 truncate">{label}</p>
             </div>
           ))}
         </div>

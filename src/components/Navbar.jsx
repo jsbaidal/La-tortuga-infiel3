@@ -35,7 +35,7 @@ function Navbar() {
             <a
               key={link}
               href="#"
-              className="text-sm font-semibold text-white/40 hover:text-white transition-colors"
+              className="text-sm font-semibold text-white/40 hover:text-white transition-colors whitespace-nowrap"
             >
               {link}
             </a>
@@ -54,7 +54,7 @@ function Navbar() {
             aria-label="Language selector"
             value={lang}
             onChange={(e) => changeLanguage(e.target.value)}
-            className="select-input"
+            className="select-input w-20"
           >
             {availableLanguages.map((l) => (
               <option key={l} value={l}>{l.toUpperCase()}</option>
