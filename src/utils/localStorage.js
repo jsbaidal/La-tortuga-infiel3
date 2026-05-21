@@ -47,7 +47,11 @@ export function removeItem(key) {
 
 export function clearNamespace(prefix) {
   try {
-    const keys = Object.keys(localStorage);
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (key) keys.push(key);
+    }
     keys.forEach((k) => {
       if (k.startsWith(prefix)) localStorage.removeItem(k);
     });
