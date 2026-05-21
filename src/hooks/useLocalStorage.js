@@ -18,6 +18,10 @@ export default function useLocalStorage(key, initialValue, options = {}) {
 
   useEffect(() => {
     try {
+      if (state === undefined) {
+        removeItem(key);
+        return;
+      }
       setItem(key, state, { ttl });
     } catch (err) {
       console.error('useLocalStorage set error:', err);
