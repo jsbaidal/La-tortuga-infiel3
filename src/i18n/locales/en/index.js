@@ -20,7 +20,11 @@ export default async function load() {
   }
 
   if (namespaceErrors.length) {
-    throw new Error(`Locale "en" missing keys in namespaces -> ${namespaceErrors.join(' | ')}`);
+    const message = `Locale "en" missing keys in namespaces -> ${namespaceErrors.join(' | ')}`;
+    if (import.meta.env.DEV) {
+      throw new Error(message);
+    }
+    console.warn(message);
   }
 
   return merged;
