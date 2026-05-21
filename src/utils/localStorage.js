@@ -2,7 +2,7 @@ export function setItem(key, value, { ttl } = {}) {
   try {
     const record = {
       value,
-      expires: ttl ? Date.now() + ttl * 1000 : null,
+      expires: ttl != null ? Date.now() + ttl * 1000 : null,
     };
     localStorage.setItem(key, JSON.stringify(record));
     return true;
