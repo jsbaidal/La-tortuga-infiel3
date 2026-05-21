@@ -17,11 +17,20 @@ export function getItem(key, defaultValue = null) {
     const raw = localStorage.getItem(key);
     if (!raw) return defaultValue;
     const record = JSON.parse(raw);
-    if (record && record.expires && Date.now() > record.expires) {
+    const hasStoredShape =
+      record !== null &&
+      typeof record === 'object' &&
+      !Array.isArray(record) &&
+      Object.prototype.hasOwnProperty.call(record, 'value');
+
+    if (!hasStoredShape) return defaultValue;
+
+    if (record.expires && Date.now() > record.expires) {
       localStorage.removeItem(key);
       return defaultValue;
     }
-    return record ? record.value : defaultValue;
+
+    return record.value;
   } catch (err) {
     console.error('localStorage.getItem error:', err);
     return defaultValue;
