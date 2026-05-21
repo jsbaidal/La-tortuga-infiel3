@@ -6,9 +6,9 @@ function Navbar() {
   const { t, lang, changeLanguage, availableLanguages } = useI18n();
 
   const links = [
-    t('navbar.home'),
-    t('navbar.favorites'),
-    t('navbar.about'),
+    { id: 'home', label: t('navbar.home') },
+    { id: 'favorites', label: t('navbar.favorites') },
+    { id: 'about', label: t('navbar.about') },
   ];
 
   return (
@@ -33,11 +33,11 @@ function Navbar() {
         <nav className="hidden md:flex items-center gap-6">
           {links.map((link) => (
             <a
-              key={link}
+              key={link.id}
               href="#"
               className="text-sm font-semibold text-white/40 hover:text-white transition-colors whitespace-nowrap"
             >
-              {link}
+              {link.label}
             </a>
           ))}
         </nav>

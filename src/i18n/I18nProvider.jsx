@@ -5,10 +5,13 @@ const I18nContext = createContext(null);
 
 export function I18nProvider({ children, defaultLang = 'en' }) {
   const [lang, setLang] = useState(() => {
+    const isSupportedLanguage = (value) => availableLanguages.includes(value);
     try {
-      return localStorage.getItem('lang') || defaultLang;
+      const storedLang = localStorage.getItem('lang');
+      if (isSupportedLanguage(storedLang)) return storedLang;
+      return isSupportedLanguage(defaultLang) ? defaultLang : availableLanguages[0];
     } catch {
-      return defaultLang;
+      return availableLanguages.includes(defaultLang) ? defaultLang : availableLanguages[0];
     }
   });
   const [messages, setMessages] = useState(null);

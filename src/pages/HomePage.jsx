@@ -10,9 +10,9 @@ function HomePage() {
   const [query, setQuery] = useState("");
 
   const STATS = [
-    { label: t('home.stats.pokemon'), value: "151", color: "text-pokedex-blue" },
-    { label: t('home.stats.types'), value: "15", color: "text-pokedex-green" },
-    { label: t('home.stats.caught'), value: "0", color: "text-pokedex-yellow" },
+    { id: 'pokemon', label: t('home.stats.pokemon'), value: "151", color: "text-pokedex-blue" },
+    { id: 'types', label: t('home.stats.types'), value: "15", color: "text-pokedex-green" },
+    { id: 'caught', label: t('home.stats.caught'), value: "0", color: "text-pokedex-yellow" },
   ];
 
   const handleChange = (e) => {
@@ -51,8 +51,8 @@ function HomePage() {
 
         {/* Stats */}
         <div className="flex gap-6">
-          {STATS.map(({ label, value, color }) => (
-            <div key={label} className="text-center w-24">
+          {STATS.map(({ id, label, value, color }) => (
+            <div key={id} className="text-center w-24">
               <p className={`text-3xl font-black ${color}`}>{value}</p>
               <p className="text-xs text-white/30 font-mono mt-1 truncate">{label}</p>
             </div>
