@@ -22,16 +22,16 @@ src/
 
 ## Features roadmap
 
-| # | Feature | Conceptos |
-|---|---------|-----------|
-| 1 | PokemonCard con datos reales | JSX, componentes, props, fetch básico |
-| 2 | Buscador por nombre | useState, eventos, filtrar arrays |
-| 3 | Filtrar por tipo | múltiples estados, lógica combinada |
-| 4 | Paginación | estado para páginas, useEffect con dependencias |
-| 5 | Vista de detalle | renderizado condicional, más datos de la API |
-| 6 | Favoritos | estado compartido, levantar estado |
-| 7 | Persistencia | localStorage, custom hook |
-| 8 | Backend propio | Node/Express, guardar favoritos en DB |
+| # | Feature | Conceptos | Estado |
+|---|---------|-----------|--------|
+| 1 | PokemonCard con datos reales | JSX, componentes, props, fetch básico | ❌ |
+| 2 | Buscador por nombre | useState, eventos, filtrar arrays | ❌ |
+| 3 | Filtrar por tipo | múltiples estados, lógica combinada | ❌ |
+| 4 | Paginación | estado para páginas, useEffect con dependencias | ✔ |
+| 5 | Vista de detalle | renderizado condicional, más datos de la API | ❌ |
+| 6 | Favoritos | estado compartido, levantar estado | ❌ |
+| 7 | Persistencia | localStorage, custom hook | ❌ |
+| 8 | Backend propio | Node/Express, guardar favoritos en DB | ❌ |
 
 ## Setup
 
