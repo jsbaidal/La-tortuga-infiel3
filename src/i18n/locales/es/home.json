@@ -15,6 +15,6 @@
   "pagination": {
     "prev": "← Anterior",
     "next": "Siguiente →",
-    "page_info": "página 1 — feature 4"
+    "page_info": "página {current} de {total}"
   }
 }

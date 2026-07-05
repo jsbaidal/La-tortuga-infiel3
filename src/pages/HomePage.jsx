@@ -3,6 +3,9 @@
 import PokemonCard from "../components/PokemonCard";
 import { useState, useEffect } from "react";
 import useI18n from '../i18n/useI18n'
+import usePagination from '../hooks/usePagination'
+
+const ITEMS_PER_PAGE = 12;
 
 function HomePage() {
   const { t } = useI18n();
@@ -21,7 +24,7 @@ function HomePage() {
   };
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/")
+    fetch("https://pokeapi.co/api/v2/pokemon/?limit=151&offset=0")
       .then((res) => res.json())
       .then((data) => setPokemon(data.results))
       .catch((err) => console.log(err));
@@ -30,6 +33,14 @@ function HomePage() {
   const PokemonesFiltrados = pokemon.filter((p) =>
     p.name.toLowerCase().includes(query.toLowerCase()),
   );
+
+  const {
+    page: safeCurrentPage,
+    totalPages,
+    items: pokemonesVisibles,
+    next: handleNextPage,
+    prev: handlePreviousPage,
+  } = usePagination(PokemonesFiltrados, ITEMS_PER_PAGE, query);
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
@@ -83,14 +94,14 @@ function HomePage() {
 
       {/* Grid — Feature 1 */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-        {PokemonesFiltrados.map((pokemon, index) => {
+        {pokemonesVisibles.map((pokemon) => {
           const numeroDePokemon = pokemon.url.split("/")[6];
           const imagenExtraida = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${numeroDePokemon}.png`;
           return (
             <PokemonCard
               nombre={pokemon.name}
               imagen={imagenExtraida}
-              key={index}
+              key={pokemon.name}
             ></PokemonCard>
           );
         })}
@@ -98,13 +109,21 @@ function HomePage() {
 
       {/* Paginación — Feature 4 */}
       <div className="mt-12 flex items-center justify-center gap-4">
-        <button disabled className="btn-primary opacity-30 cursor-not-allowed">
+        <button
+          onClick={handlePreviousPage}
+          disabled={safeCurrentPage === 1}
+          className="btn-primary disabled:opacity-30 disabled:cursor-not-allowed"
+        >
           {t('home.pagination.prev')}
         </button>
         <span className="text-xs font-mono text-white/20">
-          {t('home.pagination.page_info')}
+          {t('home.pagination.page_info', { current: safeCurrentPage, total: totalPages })}
         </span>
-        <button disabled className="btn-primary opacity-30 cursor-not-allowed">
+        <button
+          onClick={handleNextPage}
+          disabled={safeCurrentPage === totalPages}
+          className="btn-primary disabled:opacity-30 disabled:cursor-not-allowed"
+        >
           {t('home.pagination.next')}
         </button>
       </div>

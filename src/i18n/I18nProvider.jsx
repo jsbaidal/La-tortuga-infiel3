@@ -44,21 +44,21 @@ export function I18nProvider({ children, defaultLang = 'en' }) {
     return true;
   };
 
-  const t = (key) => {
+  const t = (key, params = {}) => {
     if (!messages) return key;
-    if (key.includes('.')) {
-      const parts = key.split('.');
-      let cur = messages;
-      for (const part of parts) {
-        if (cur && typeof cur === 'object' && part in cur) {
-          cur = cur[part];
-        } else {
-          return key;
-        }
+    let cur = messages;
+    for (const part of key.split('.')) {
+      if (cur && typeof cur === 'object' && part in cur) {
+        cur = cur[part];
+      } else {
+        return key;
       }
-      return cur ?? key;
     }
-    return messages[key] ?? key;
+    if (typeof cur !== 'string') return cur ?? key;
+    return cur.replace(/\{(\w+)\}/g, (_, paramKey) => {
+      const value = params[paramKey];
+      return value === undefined || value === null ? `{${paramKey}}` : String(value);
+    });
   };
 
   const value = useMemo(
